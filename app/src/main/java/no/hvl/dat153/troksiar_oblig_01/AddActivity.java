@@ -4,8 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -14,10 +12,8 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.material.snackbar.Snackbar;
-
-import java.util.ArrayList;
-import java.util.List;
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
 
 public class AddActivity extends AppCompatActivity {
 
@@ -26,8 +22,6 @@ public class AddActivity extends AppCompatActivity {
     private EditText etTextPhotoName;
     private ImageView mImageView;
     private Uri uri;
-    public ArrayList<Uri> uriList = new ArrayList<>();
-    private ArrayList<String> nameList = new ArrayList<>();
 
     @SuppressLint({"WrongConstant", "ShowToast"})
     @Override
@@ -35,16 +29,7 @@ public class AddActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        Bundle names = getIntent().getExtras();
-        ArrayList<Uri> photoUris = (ArrayList<Uri>) getIntent().getSerializableExtra("uriList");
-
-        List<String> photoNames = null;
-
-        if(names != null) {
-            photoNames = names.getStringArrayList("nameList");
-        }
-
-        mImageView = findViewById(R.id.imageView);
+        mImageView = findViewById(R.id.quiz_photo);
         etTextPhotoName = findViewById(R.id.etPhotoName);
 
         openPhoto();
@@ -55,8 +40,8 @@ public class AddActivity extends AppCompatActivity {
                 saveImage(uri);
                 Toast.makeText(AddActivity.this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
                 Intent i = new Intent(this, DatabaseActivity.class);
-                i.putExtra("nameList", nameList);
-                i.putExtra("uriList", uriList);
+                i.putExtra("nameList", photoNames);             //TODO DELETE
+                i.putExtra("uriList", photoUris);
                 startActivity(i);
                 finish();
             } else {
@@ -73,21 +58,18 @@ public class AddActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        /*&& requestCode == RESULT_OK*/
-        if (requestCode == PICK_IMAGE_REQUEST && data != null && data.getData() != null) {
+        if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             Uri mImageUri = data.getData();
             mImageView.setImageURI(mImageUri);
             uri = mImageUri;
         }
     }
 
-    //DatabaseActivity databaseActivity = new DatabaseActivity();
-
     private void saveImage(Uri imageUri){
-        uriList.add(imageUri);
-        nameList.add(etTextPhotoName.getText().toString());
+        photoUris.add(imageUri);
+        photoNames.add(etTextPhotoName.getText().toString());
     }
 }

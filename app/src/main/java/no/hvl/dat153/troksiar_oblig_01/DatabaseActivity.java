@@ -15,9 +15,10 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DatabaseActivity extends AppCompatActivity {
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
 
-    //AddActivity addActivity;
+public class DatabaseActivity extends AppCompatActivity {
 
     private RecyclerView mRecycleView;
     private ImageAdapter mAdapter;
@@ -27,31 +28,25 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        Bundle names = getIntent().getExtras();
-        ArrayList<Uri> photoUris = (ArrayList<Uri>) getIntent().getSerializableExtra("uriList");
-
-        List<String> photoNames = null;
-
-        if(names != null) {
-            photoNames = names.getStringArrayList("nameList");
-        }
-
         mRecycleView = findViewById(R.id.recycler_view);
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter = new ImageAdapter(DatabaseActivity.this, photoUris,photoNames);
+        mAdapter = new ImageAdapter(this); //dabase.tihs
 
         mRecycleView.setAdapter(mAdapter);
 
-
         FloatingActionButton fab = findViewById(R.id.fab);
-        List<String> finalPhotoNames = photoNames;
+
         fab.setOnClickListener(view -> {
-            Intent i = new Intent(this, AddActivity.class);
-            i.putExtra("nameList", (Parcelable) finalPhotoNames);
-            i.putExtra("uriList", photoUris);
-            startActivity(new Intent(DatabaseActivity.this,AddActivity.class));
+            addToDatabase();
         });
+    }
+    private void addToDatabase() {
+        Intent i = new Intent(this, AddActivity.class);
+        i.putExtra("nameList", photoNames);             ///TODO DELETE
+        i.putExtra("uriList", photoUris);
+        startActivity(i);
+        finish();
     }
 }

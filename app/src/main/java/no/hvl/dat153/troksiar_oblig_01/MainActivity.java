@@ -2,13 +2,19 @@ package no.hvl.dat153.troksiar_oblig_01;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.widget.Button;
 
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
+
+    public static ArrayList<String> photoNames = new ArrayList<>();
+    public static ArrayList<Uri> photoUris = new ArrayList<>();
 
     @SuppressLint("CutPasteId")
     @Override
@@ -24,9 +30,6 @@ public class MainActivity extends AppCompatActivity {
             //setContentView(R.layout.activity_quiz);               //TODO difference?
             openQuizActivity();
         });
-
-        Button btnAdd = findViewById(R.id.btnAdd);
-        btnAdd.setOnClickListener(v -> openAddActivity());                  //TODO DELETE
     }
 
     /*private void openActivity(Class<DatabaseActivity> activityClass) {        //TODO: how to set parameter?
@@ -34,15 +37,12 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
     private void openDatabaseActivity() {
-        startActivity(new Intent(this,DatabaseActivity.class));
+        startActivity(new Intent(this, DatabaseActivity.class));
     }
 
     private void openQuizActivity() {
-        startActivity(new Intent(this,QuizActivity.class));
-    }
-
-    private void openAddActivity() {
-        startActivity(new Intent(this,AddActivity.class));          //TODO delete
+        startActivity(new Intent(MainActivity.this, QuizActivity.class));
+        finish();
     }
 
    /* @Override

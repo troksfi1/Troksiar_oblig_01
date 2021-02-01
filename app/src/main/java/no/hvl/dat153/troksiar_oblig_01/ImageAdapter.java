@@ -19,13 +19,9 @@ import java.util.List;
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
     private final Context mContext;
-    private final List<Uri> photoUriList;
-    private final List<String> photoNameList;
 
-    public ImageAdapter(Context context, List<Uri> photoUris, List<String> photoNames) {
+    public ImageAdapter(Context context) {
         mContext = context;
-        photoUriList = photoUris;
-        photoNameList = photoNames;
     }
 
     @NonNull
@@ -38,19 +34,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
-        holder.textViewName.setText(photoNameList.get(position));
-        holder.imageView.setImageURI(photoUriList.get(position));      //tady bych se nemel brat list z addActivity ale tehle tridy pres constukro naplnenej
-        /*Picasso.get()
-                .load(photoUriList.get(position))
+        holder.textViewName.setText(MainActivity.photoNames.get(position));
+        //holder.imageView.setImageURI(photoUriList.get(position));      //tady bych se nemel brat list z addActivity ale tehle tridy pres constukro naplnenej
+        Picasso.get()
+                .load(MainActivity.photoUris.get(position))
                 .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
-                .into(holder.imageView);*/
+                .into(holder.imageView);
     }
 
     @Override
     public int getItemCount() {
-        return photoUriList.size();
+        return MainActivity.photoUris.size();
     }
 
     public static class ImageViewHolder extends RecyclerView.ViewHolder {
