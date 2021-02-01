@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="btbPlus">plus</string>
+    <string name="btDatabase">DATABASE</string>
+    <string name="btnQuiz">QUIZ</string>
+    <string name="btnAdd">ADD</string>
+    <string name="enter_photo_name">Enter photo name</string>
+    <string name="btnSave">SAVE</string>
+</resources>
