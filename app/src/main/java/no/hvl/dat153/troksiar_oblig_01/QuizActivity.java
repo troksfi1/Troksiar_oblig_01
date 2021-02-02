@@ -11,9 +11,6 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
@@ -24,6 +21,9 @@ public class QuizActivity extends AppCompatActivity {
     private EditText guessedName;
     private ImageView photo;
     private TextView score;
+    private final AtomicInteger scoreInt = new AtomicInteger();
+
+    int i = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -35,19 +35,11 @@ public class QuizActivity extends AppCompatActivity {
         guessedName = findViewById(R.id.quiz_photo_name);
         score = findViewById(R.id.score);
 
-
-        //podle casu random cislo z listi jedna promennana prirazena do prome porovna ni s listama
-
-        int i = 1;
-        AtomicInteger scoreInt = new AtomicInteger();
-
-        //Picasso.get().load(photoUris.get(i)).into();
-        photo.setImageURI(photoUris.get(0));
+        photo.setImageURI(photoUris.get(i));
 
         Button btnCheck = findViewById(R.id.button_check);
         btnCheck.setOnClickListener(v -> {
-            //isCorrect();
-            if (guessedName.getText().toString().equals(photoNames.get(i))) {
+            if (nameIsCorrect()) {
                 Toast.makeText(this, "Good job!", Toast.LENGTH_LONG).show();
                 scoreInt.set(scoreInt.get() + 1);
                 score.setText("Score: " + scoreInt);
@@ -55,15 +47,21 @@ public class QuizActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Never mind", Toast.LENGTH_LONG).show();
             }
+            nextPicture();
         });
+    }
 
+    boolean nameIsCorrect() {
+        return guessedName.getText().toString().equals(photoNames.get(i));
+    }
 
-        Random random = new Random();
-        random.nextInt();
-
-
-        //photoNames, photoUris;
-
-
+    void nextPicture() {
+        if(i < photoNames.size()-1) {
+            i = i+1;
+        } else{
+            i = 0;
+        }
+        photo.setImageURI(photoUris.get(i));
+        guessedName.setText("");
     }
 }

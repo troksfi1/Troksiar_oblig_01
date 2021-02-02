@@ -15,4 +15,11 @@
     <string name="btnAdd">ADD</string>
     <string name="enter_photo_name">Enter photo name</string>
     <string name="btnSave">SAVE</string>
+    <string name="guess_the_name">Guess the name…</string>
+    <string name="checkButton">Button</string>
+    <string name="score">Score</string>
+    <string name="pic_to_guess">pic to guess</string>
+    <string name="pic_to_save">pic to save</string>
+    <string name="pic_database">pic_database</string>
+    <string name="name_database">NAME</string>
 </resources>

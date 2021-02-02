@@ -3,6 +3,7 @@ package no.hvl.dat153.troksiar_oblig_01;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -10,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
@@ -23,6 +25,7 @@ public class AddActivity extends AppCompatActivity {
     private ImageView mImageView;
     private Uri uri;
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressLint({"WrongConstant", "ShowToast"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,21 +42,18 @@ public class AddActivity extends AppCompatActivity {
             if(!uri.toString().equals("") && !etTextPhotoName.getText().toString().equals("")) {
                 saveImage(uri);
                 Toast.makeText(AddActivity.this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
-                Intent i = new Intent(this, DatabaseActivity.class);
-                i.putExtra("nameList", photoNames);             //TODO DELETE
-                i.putExtra("uriList", photoUris);
-                startActivity(i);
-                finish();
+                startActivity(new Intent(this, DatabaseActivity.class));
             } else {
                 Toast.makeText(AddActivity.this, "Enter name!", Toast.LENGTH_LONG).show();
             }
         });
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     public void openPhoto() {
         Intent intent = new Intent();
         intent.setType("image/*");
-        intent.setAction(Intent.ACTION_GET_CONTENT);
+        intent.setAction(Intent.ACTION_OPEN_DOCUMENT);
         startActivityForResult(intent, PICK_IMAGE_REQUEST);
     }
 

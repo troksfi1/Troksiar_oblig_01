@@ -26,10 +26,7 @@ public class MainActivity extends AppCompatActivity {
         btnDatabase.setOnClickListener(v -> openDatabaseActivity());
 
         Button btnQuiz = findViewById(R.id.btnQuiz);
-        btnQuiz.setOnClickListener(v -> {
-            //setContentView(R.layout.activity_quiz);               //TODO difference?
-            openQuizActivity();
-        });
+        btnQuiz.setOnClickListener(v -> openQuizActivity());
     }
 
     /*private void openActivity(Class<DatabaseActivity> activityClass) {        //TODO: how to set parameter?
@@ -42,28 +39,5 @@ public class MainActivity extends AppCompatActivity {
 
     private void openQuizActivity() {
         startActivity(new Intent(MainActivity.this, QuizActivity.class));
-        finish();
     }
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 }

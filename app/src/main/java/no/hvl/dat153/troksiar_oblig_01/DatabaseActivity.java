@@ -32,21 +32,12 @@ public class DatabaseActivity extends AppCompatActivity {
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter = new ImageAdapter(this); //dabase.tihs
+        mAdapter = new ImageAdapter(this);
 
         mRecycleView.setAdapter(mAdapter);
 
         FloatingActionButton fab = findViewById(R.id.fab);
 
-        fab.setOnClickListener(view -> {
-            addToDatabase();
-        });
-    }
-    private void addToDatabase() {
-        Intent i = new Intent(this, AddActivity.class);
-        i.putExtra("nameList", photoNames);             ///TODO DELETE
-        i.putExtra("uriList", photoUris);
-        startActivity(i);
-        finish();
+        fab.setOnClickListener(view -> startActivity(new Intent(this, AddActivity.class)));
     }
 }

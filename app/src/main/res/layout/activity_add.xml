@@ -20,7 +20,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/etPhotoName"
-        android:layout_above="@id/btnSave"/>
+        android:layout_above="@id/btnSave"
+        android:contentDescription="@string/pic_to_save" />
 
     <Button
         android:id="@+id/btnSave"

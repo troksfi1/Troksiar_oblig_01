@@ -35,7 +35,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         holder.textViewName.setText(MainActivity.photoNames.get(position));
-        //holder.imageView.setImageURI(photoUriList.get(position));      //tady bych se nemel brat list z addActivity ale tehle tridy pres constukro naplnenej
+        //holder.imageView.setImageURI(photoUriList.get(position));
         Picasso.get()
                 .load(MainActivity.photoUris.get(position))
                 .placeholder(R.mipmap.ic_launcher)

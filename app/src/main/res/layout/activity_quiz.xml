@@ -14,7 +14,7 @@
         android:layout_marginStart="148dp"
         android:layout_marginLeft="148dp"
         android:layout_marginTop="44dp"
-        android:text="Guess the name..." />
+        android:text="@string/guess_the_name" />
 
     <ImageView
         android:id="@+id/quiz_photo2"
@@ -22,7 +22,8 @@
         android:layout_height="417dp"
         android:layout_below="@+id/guess_name"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="31dp" />
+        android:layout_marginTop="31dp"
+        android:contentDescription="@string/pic_to_guess" />
 
     <EditText
         android:id="@+id/quiz_photo_name"
@@ -36,7 +37,8 @@
         android:layout_marginEnd="21dp"
         android:layout_marginRight="10dp"
         android:hint="@string/enter_photo_name"
-        android:inputType="text" />
+        android:inputType="text"
+        android:importantForAutofill="no" />
 
     <Button
         android:id="@+id/button_check"
@@ -49,7 +51,7 @@
         android:layout_marginStart="158dp"
         android:layout_marginLeft="158dp"
         android:layout_marginBottom="91dp"
-        android:text="Button" />
+        android:text="@string/checkButton" />
 
     <TextView
         android:id="@+id/score"
@@ -58,5 +60,5 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="40dp"
-        android:text="Score" />
+        android:text="@string/score" />
 </RelativeLayout>
