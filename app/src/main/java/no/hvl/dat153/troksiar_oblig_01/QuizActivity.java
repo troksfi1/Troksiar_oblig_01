@@ -13,6 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.btnClicker;
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
 
@@ -24,6 +25,7 @@ public class QuizActivity extends AppCompatActivity {
     private final AtomicInteger scoreInt = new AtomicInteger();
 
     int i = 0;
+    int btn = 0;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -39,14 +41,15 @@ public class QuizActivity extends AppCompatActivity {
 
         Button btnCheck = findViewById(R.id.button_check);
         btnCheck.setOnClickListener(v -> {
+            btn = btn + 1;
             if (nameIsCorrect()) {
                 Toast.makeText(this, "Good job!", Toast.LENGTH_LONG).show();
                 scoreInt.set(scoreInt.get() + 1);
-                score.setText("Score: " + scoreInt);
 
             } else {
                 Toast.makeText(this, "Never mind", Toast.LENGTH_LONG).show();
             }
+            score.setText("Score: " + scoreInt + " of " + btn);
             nextPicture();
         });
     }

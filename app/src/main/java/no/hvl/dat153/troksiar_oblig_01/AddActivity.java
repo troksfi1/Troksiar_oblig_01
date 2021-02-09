@@ -1,19 +1,23 @@
 package no.hvl.dat153.troksiar_oblig_01;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
 
+import static no.hvl.dat153.troksiar_oblig_01.MainActivity.btnClicker;
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
 import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
 
@@ -26,7 +30,6 @@ public class AddActivity extends AppCompatActivity {
     private Uri uri;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @SuppressLint({"WrongConstant", "ShowToast"})
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +44,10 @@ public class AddActivity extends AppCompatActivity {
         btnSave.setOnClickListener(v -> {
             if(!uri.toString().equals("") && !etTextPhotoName.getText().toString().equals("")) {
                 saveImage(uri);
-                Toast.makeText(AddActivity.this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, DatabaseActivity.class));
             } else {
-                Toast.makeText(AddActivity.this, "Enter name!", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Enter name!", Toast.LENGTH_LONG).show();
             }
         });
     }

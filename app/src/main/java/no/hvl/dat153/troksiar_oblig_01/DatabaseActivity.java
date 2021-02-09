@@ -4,9 +4,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,11 +38,24 @@ public class DatabaseActivity extends AppCompatActivity {
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
         mAdapter = new ImageAdapter(this);
-
         mRecycleView.setAdapter(mAdapter);
+        new ItemTouchHelper(itemTouchSimpleCallback).attachToRecyclerView(mRecycleView);
 
         FloatingActionButton fab = findViewById(R.id.fab);
-
         fab.setOnClickListener(view -> startActivity(new Intent(this, AddActivity.class)));
     }
+    ItemTouchHelper.SimpleCallback itemTouchSimpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
+        @Override
+        public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
+            return false;
+        }
+
+        @Override
+        public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
+            int position = viewHolder.getAdapterPosition();
+            photoUris.remove(position);
+            photoNames.remove(position);
+            mAdapter.notifyDataSetChanged();
+        }
+    };
 }

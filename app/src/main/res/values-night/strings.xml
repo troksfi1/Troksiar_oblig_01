@@ -6,8 +6,8 @@
     <string name="btnAdd">ADD</string>
     <string name="enter_photo_name">Enter photo name</string>
     <string name="btnSave">SAVE</string>
-    <string name="checkButton">Button</string>
-    <string name="score">Score</string>
+    <string name="checkButton">Check</string>
+    <string name="overall_score">Overall score</string>
     <string name="pic_to_guess">pic to guess</string>
     <string name="pic_to_save">pic to save</string>
     <string name="pic_database">pic_database</string>
