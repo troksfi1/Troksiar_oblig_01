@@ -1,4 +1,4 @@
-package no.hvl.dat153.troksiar_oblig_01;
+package no.hvl.dat153.troksiar_oblig_01.activities;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
@@ -13,9 +13,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import static no.hvl.dat153.troksiar_oblig_01.MainActivity.btnClicker;
-import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
-import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
+import no.hvl.dat153.troksiar_oblig_01.R;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -37,12 +35,12 @@ public class QuizActivity extends AppCompatActivity {
         guessedName = findViewById(R.id.quiz_photo_name);
         score = findViewById(R.id.score);
 
-        photo.setImageURI(photoUris.get(i));
+        //photo.setImageURI(photoUris.get(i));                      //TODO
 
         Button btnCheck = findViewById(R.id.button_check);
         btnCheck.setOnClickListener(v -> {
             btn = btn + 1;
-            if (nameIsCorrect()) {
+            /*if (nameIsCorrect()) {                                                        //TODO
                 Toast.makeText(this, "Good job!", Toast.LENGTH_LONG).show();
                 scoreInt.set(scoreInt.get() + 1);
 
@@ -50,11 +48,11 @@ public class QuizActivity extends AppCompatActivity {
                 Toast.makeText(this, "Never mind", Toast.LENGTH_LONG).show();
             }
             score.setText("Score: " + scoreInt + " of " + btn);
-            nextPicture();
+            nextPicture();*/
         });
     }
 
-    boolean nameIsCorrect() {
+    /*boolean nameIsCorrect() {                                                         //TODO
         return guessedName.getText().toString().equals(photoNames.get(i));
     }
 
@@ -66,5 +64,5 @@ public class QuizActivity extends AppCompatActivity {
         }
         photo.setImageURI(photoUris.get(i));
         guessedName.setText("");
-    }
+    }*/
 }

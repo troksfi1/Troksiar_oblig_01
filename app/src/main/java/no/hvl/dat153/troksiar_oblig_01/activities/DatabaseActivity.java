@@ -1,32 +1,30 @@
-package no.hvl.dat153.troksiar_oblig_01;
+package no.hvl.dat153.troksiar_oblig_01.activities;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageButton;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.room.RoomDatabase;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoNames;
-import static no.hvl.dat153.troksiar_oblig_01.MainActivity.photoUris;
+import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
+import no.hvl.dat153.troksiar_oblig_01.R;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemRepository;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemRoomDatabase;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 public class DatabaseActivity extends AppCompatActivity {
 
     private RecyclerView mRecycleView;
     private ImageAdapter mAdapter;
+    ItemViewModel mItemViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,13 +35,19 @@ public class DatabaseActivity extends AppCompatActivity {
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        mAdapter = new ImageAdapter(this);
+        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel .class);
+
+        //mAdapter = new ImageAdapter(this, mItemViewModel.getAllItems().getValue());
         mRecycleView.setAdapter(mAdapter);
         new ItemTouchHelper(itemTouchSimpleCallback).attachToRecyclerView(mRecycleView);
+
+
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(this, AddActivity.class)));
     }
+
+    //SwipeToDelete
     ItemTouchHelper.SimpleCallback itemTouchSimpleCallback = new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT | ItemTouchHelper.LEFT) {
         @Override
         public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder target) {
@@ -53,8 +57,11 @@ public class DatabaseActivity extends AppCompatActivity {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            photoUris.remove(position);
-            photoNames.remove(position);
+            /*photoUris.remove(position);       //TODO nahradit vymaz z databaze
+            photoNames.remove(position);*/
+
+            //mItemViewModel.deleteItem();
+
             mAdapter.notifyDataSetChanged();
         }
     };

@@ -1,4 +1,4 @@
-package no.hvl.dat153.troksiar_oblig_01;
+package no.hvl.dat153.troksiar_oblig_01.activities;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,17 +11,19 @@ import android.widget.Button;
 import java.util.ArrayList;
 import java.util.List;
 
+import no.hvl.dat153.troksiar_oblig_01.R;
+
 public class MainActivity extends AppCompatActivity {
 
-    public static List<String> photoNames = new ArrayList<>();
-    public static List<Uri> photoUris = new ArrayList<>();
+    //public static List<String> photoNames = new ArrayList<>();
+    //public static List<Uri> photoUris = new ArrayList<>();
     public static int btnClicker;
     boolean oneTime = true;
 
     @Override
     protected void onResume() {
         super.onResume();
-        addDataToDb();
+        //addDataToDb();
     }
 
     @Override
@@ -40,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         btnQuiz.setOnClickListener(v -> openQuizActivity());
     }
 
-    private void addDataToDb() {
+    /*private void addDataToDb() {
         photoNames.add("Czechia");
         photoNames.add("Norway");
         photoNames.add("Greece");
@@ -49,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
         photoUris.add(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.czechia));
         photoUris.add(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.norway));
         photoUris.add(Uri.parse("android.resource://" + getPackageName() + "/" + R.drawable.greece));
-    }
+    }*/
 
     private void openDatabaseActivity() {
         startActivity(new Intent(this, DatabaseActivity.class));
