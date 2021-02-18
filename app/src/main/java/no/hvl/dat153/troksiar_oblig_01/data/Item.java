@@ -1,5 +1,7 @@
 package no.hvl.dat153.troksiar_oblig_01.data;
 
+import android.graphics.Bitmap;
+
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
@@ -13,9 +15,12 @@ public class Item {
     @ColumnInfo(name = "photo_name")
     public String photoName;
 
-    public Item(int id, String photoName) {
-        this.id = id;
+    @ColumnInfo(name = "photo")
+    public Bitmap photo;
+
+    public Item(String photoName, Bitmap photo) {
         this.photoName = photoName;
+        this.photo = photo;
     }
 
     public Item() {
@@ -38,7 +43,12 @@ public class Item {
         this.photoName = photoName;
     }
 
-    /*@ColumnInfo(name = "photo")
-    public Bitmap photo;*/
+    public Bitmap getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(Bitmap photo) {
+        this.photo = photo;
+    }
 }
 

@@ -7,7 +7,6 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import java.util.List;
-import java.util.concurrent.CompletableFuture;
 
 public class ItemRepository {
 
@@ -20,7 +19,7 @@ public class ItemRepository {
         searchResults.setValue(results);
     }*/
 
-    /*private static class QueryAsyncTask extends AsyncTask<Item, Void, LiveData<List<Item>>> {
+    /*private static class QueryAsyncTask extends AsyncTask<LiveData<List<Item>>, Void, LiveData<List<Item>>> {
 
         private ItemDao asyncTaskDao;
 
@@ -29,7 +28,7 @@ public class ItemRepository {
         }
 
         @Override
-        protected LiveData<List<Item>> doInBackground(Item... items) {
+        protected LiveData<List<Item>> doInBackground(LiveData<List<Item>>... items) {
             return asyncTaskDao.getAllItems();
         }
     }*/
@@ -62,9 +61,6 @@ public class ItemRepository {
         }
     }
 
-
-    //TODO
-
     public ItemRepository(Application application) {
         ItemRoomDatabase db = ItemRoomDatabase.getDatabase(application);
         itemDao = db.itemDao();
@@ -76,11 +72,6 @@ public class ItemRepository {
         return allItems;
     }
 
-    /*public void getItem(Item newItem) {
-        InsertAsyncTask task = new InsertAsyncTask(itemDao);
-        task.execute(newItem);
-    }*/
-
     public void insertItem(Item newItem) {
         InsertAsyncTask task = new InsertAsyncTask(itemDao);
         task.execute(newItem);
@@ -90,15 +81,4 @@ public class ItemRepository {
         DeleteAsyncTask task = new DeleteAsyncTask(itemDao);
         task.execute(newItem);
     }
-
-
-
-
-    /*public MutableLiveData<List<Item>> getSearchResults() {
-        return searchResults;
-    }
-
-    public synchronized void setItem(Item item) {
-        itemDao.addItem(item);
-    }*/
 }

@@ -11,9 +11,13 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
+import no.hvl.dat153.troksiar_oblig_01.data.Item;
+
+import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -21,6 +25,7 @@ public class QuizActivity extends AppCompatActivity {
     private ImageView photo;
     private TextView score;
     private final AtomicInteger scoreInt = new AtomicInteger();
+    private List<Item> items;
 
     int i = 0;
     int btn = 0;
@@ -35,12 +40,12 @@ public class QuizActivity extends AppCompatActivity {
         guessedName = findViewById(R.id.quiz_photo_name);
         score = findViewById(R.id.score);
 
-        //photo.setImageURI(photoUris.get(i));                      //TODO
+        mItemViewModel.getAllItems().observe(this, this::setItems);
 
         Button btnCheck = findViewById(R.id.button_check);
         btnCheck.setOnClickListener(v -> {
             btn = btn + 1;
-            /*if (nameIsCorrect()) {                                                        //TODO
+            if (nameIsCorrect()) {
                 Toast.makeText(this, "Good job!", Toast.LENGTH_LONG).show();
                 scoreInt.set(scoreInt.get() + 1);
 
@@ -48,21 +53,26 @@ public class QuizActivity extends AppCompatActivity {
                 Toast.makeText(this, "Never mind", Toast.LENGTH_LONG).show();
             }
             score.setText("Score: " + scoreInt + " of " + btn);
-            nextPicture();*/
+            nextPicture();
         });
     }
 
-    /*boolean nameIsCorrect() {                                                         //TODO
-        return guessedName.getText().toString().equals(photoNames.get(i));
+    boolean nameIsCorrect() {
+        return guessedName.getText().toString().equals(items.get(i).getPhotoName());
     }
 
     void nextPicture() {
-        if(i < photoNames.size()-1) {
+        if(i < items.size()-1) {
             i = i+1;
         } else{
             i = 0;
         }
-        photo.setImageURI(photoUris.get(i));
+        photo.setImageBitmap(items.get(i).getPhoto());
         guessedName.setText("");
-    }*/
+    }
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+        photo.setImageBitmap(items.get(i).getPhoto());
+    }
 }
