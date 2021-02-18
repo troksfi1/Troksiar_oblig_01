@@ -6,25 +6,26 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.RoomDatabase;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.util.List;
+
 import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
 import no.hvl.dat153.troksiar_oblig_01.R;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemRepository;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemRoomDatabase;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
+import no.hvl.dat153.troksiar_oblig_01.data.Item;
+
+import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+
 
 public class DatabaseActivity extends AppCompatActivity {
 
     private RecyclerView mRecycleView;
     private ImageAdapter mAdapter;
-    ItemViewModel mItemViewModel;
+    private List<Item> items;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,13 +36,15 @@ public class DatabaseActivity extends AppCompatActivity {
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
-        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel .class);
+        mAdapter = new ImageAdapter(this);
 
-        //mAdapter = new ImageAdapter(this, mItemViewModel.getAllItems().getValue());
+        mItemViewModel.getAllItems().observe(this, items -> {
+            mAdapter.setData(items);
+            setItems(items);
+        });
+
         mRecycleView.setAdapter(mAdapter);
         new ItemTouchHelper(itemTouchSimpleCallback).attachToRecyclerView(mRecycleView);
-
-
 
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(this, AddActivity.class)));
@@ -57,12 +60,12 @@ public class DatabaseActivity extends AppCompatActivity {
         @Override
         public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int direction) {
             int position = viewHolder.getAdapterPosition();
-            /*photoUris.remove(position);       //TODO nahradit vymaz z databaze
-            photoNames.remove(position);*/
-
-            //mItemViewModel.deleteItem();
-
+            mItemViewModel.deleteItem(items.get(position));         //TODO CHANGE TO DELETE FROM DBS (WITHOUT LIST)
             mAdapter.notifyDataSetChanged();
         }
     };
+
+    public void setItems(List<Item> items) {
+        this.items = items;
+    }
 }

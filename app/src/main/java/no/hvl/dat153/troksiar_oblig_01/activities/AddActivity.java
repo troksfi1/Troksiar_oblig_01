@@ -1,30 +1,28 @@
 package no.hvl.dat153.troksiar_oblig_01.activities;
 
-import android.app.Application;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModelProvider;
 
-import java.util.List;
-import java.util.Observer;
+import java.io.IOException;
 
-import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemRepository;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
+
+import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+
 
 public class AddActivity extends AppCompatActivity {
 
@@ -32,10 +30,7 @@ public class AddActivity extends AppCompatActivity {
 
     private EditText etTextPhotoName;
     private ImageView mImageView;
-    private Uri uri;
-
-    ItemViewModel mItemViewModel;
-    ImageAdapter imageAdapter;
+    private Intent photoData;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
@@ -46,17 +41,12 @@ public class AddActivity extends AppCompatActivity {
         mImageView = findViewById(R.id.quiz_photo);
         etTextPhotoName = findViewById(R.id.etPhotoName);
 
-        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
-        //mItemViewModel.getAllItems().observe(LifecycleOwner, Observer);
-
         openPhoto();
 
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(v -> {
-            if(!uri.toString().equals("") && !etTextPhotoName.getText().toString().equals("")) {
-
+            if(!etTextPhotoName.getText().toString().equals("")) {
                 insertDataToDbs();
-                //saveImage(uri);
                 Toast.makeText(this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, DatabaseActivity.class));
             } else {
@@ -65,13 +55,13 @@ public class AddActivity extends AppCompatActivity {
         });
     }
 
-    Item item = new Item();
     private void insertDataToDbs() {
-        item.setPhotoName(etTextPhotoName.getText().toString());
-        //ADD TO DBS
+        String photoName = etTextPhotoName.getText().toString();
+        Bitmap photo = getBitmap(photoData);
+
+        Item item = new Item(photoName,photo);
+        //ADD ITEM TO DBS
         mItemViewModel.addItem(item);
-        //SetList
-        //imageAdapter.setData(mItemViewModel.getAllItems().getValue());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
@@ -87,14 +77,18 @@ public class AddActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
 
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
-            Uri mImageUri = data.getData();
-            mImageView.setImageURI(mImageUri);
-            uri = mImageUri;
+            photoData = data;
+            mImageView.setImageBitmap(getBitmap(data));
         }
     }
 
-    /*private void saveImage(Uri imageUri){             //TODO DELETE
-        photoUris.add(imageUri);
-        photoNames.add(etTextPhotoName.getText().toString());
-    }*/
+    private Bitmap getBitmap(@NonNull Intent data) {
+        Uri imageUri = data.getData();
+        try {
+            return MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

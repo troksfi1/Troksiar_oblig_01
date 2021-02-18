@@ -2,6 +2,7 @@ package no.hvl.dat153.troksiar_oblig_01;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,33 +11,18 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.room.RoomDatabase;
 
-import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 import java.util.List;
 
-import no.hvl.dat153.troksiar_oblig_01.activities.DatabaseActivity;
-import no.hvl.dat153.troksiar_oblig_01.activities.MainActivity;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemRepository;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemRoomDatabase;
-import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
 
     private final Context mContext;
     private List<Item> itemList;
-    //private ItemRoomDatabase database;
 
-
-    ItemViewModel mItemViewModel;
-    //ItemRepository itemRepository;
-
-    public ImageAdapter(Context context, List<Item> items) {
+    public ImageAdapter(Context context) {
         mContext = context;
-        this.itemList = items;
         notifyDataSetChanged();
     }
 
@@ -50,20 +36,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
+        String photoName = itemList.get(position).getPhotoName();
+        Bitmap photo = itemList.get(position).getPhoto();
 
-        //mItemViewModel.getAllItems();
-        //Item item = itemList.get(position);
+        holder.textViewName.setText(photoName);
+        holder.imageView.setImageBitmap(photo);
 
-        //database = ItemRoomDatabase.getDatabase(mContext);
-
-        //holder.textViewName.setText(itemList.get(position).getPhotoName());
-
-        //itemList.add(itemRepository.getAllItems().)
-
-        /*holder.textViewName.setText(MainActivity.photoNames.get(position));
-        //holder.imageView.setImageURI(photoUriList.get(position));
-        Picasso.get()
-                .load(MainActivity.photoUris.get(position))
+        /*Picasso.get()
+                .load()
                 .placeholder(R.mipmap.ic_launcher)
                 .fit()
                 .centerCrop()
@@ -72,10 +52,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public int getItemCount() {
-        return itemList.size();         //itemList.size();
+        return itemList == null ? 0 : itemList.size();
     }
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder {
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {       //TODO DIFF
         public TextView textViewName;
         public ImageView imageView;
 
