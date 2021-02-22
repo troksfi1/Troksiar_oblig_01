@@ -10,14 +10,14 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-
-import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -39,6 +39,8 @@ public class QuizActivity extends AppCompatActivity {
         photo = findViewById(R.id.quiz_photo2);
         guessedName = findViewById(R.id.quiz_photo_name);
         score = findViewById(R.id.score);
+
+        ItemViewModel mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         mItemViewModel.getAllItems().observe(this, this::setItems);
 

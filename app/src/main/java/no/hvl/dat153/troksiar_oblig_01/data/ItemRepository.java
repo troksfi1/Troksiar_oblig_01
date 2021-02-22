@@ -10,9 +10,8 @@ import java.util.List;
 
 public class ItemRepository {
 
-    private MutableLiveData<List<Item>> searchResults = new MutableLiveData<>();
-    private LiveData<List<Item>> allItems;
-    private ItemDao itemDao;
+    private final LiveData<List<Item>> allItems;
+    private final ItemDao itemDao;
 
 
     /*private void asyncFinished(List<Item> results) {
@@ -34,7 +33,7 @@ public class ItemRepository {
     }*/
 
     private static class InsertAsyncTask extends AsyncTask<Item, Void, Void> {
-        private ItemDao asyncItemDao;
+        private final ItemDao asyncItemDao;
 
         InsertAsyncTask(ItemDao dao) {
             asyncItemDao = dao;
@@ -48,7 +47,7 @@ public class ItemRepository {
     }
 
     private static class DeleteAsyncTask extends AsyncTask<Item, Void, Void> {
-        private ItemDao asyncItemDao;
+        private final ItemDao asyncItemDao;
 
         DeleteAsyncTask(ItemDao dao) {
             asyncItemDao = dao;

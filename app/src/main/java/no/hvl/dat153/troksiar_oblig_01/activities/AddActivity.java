@@ -3,7 +3,6 @@ package no.hvl.dat153.troksiar_oblig_01.activities;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.widget.Button;
@@ -13,41 +12,42 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-
-import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 
 public class AddActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
+    private ItemViewModel mItemViewModel;
 
-    private EditText etTextPhotoName;
+    private EditText photo_name;
     private ImageView mImageView;
     private Intent photoData;
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
 
-        mImageView = findViewById(R.id.quiz_photo);
-        etTextPhotoName = findViewById(R.id.etPhotoName);
+        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
-        openPhoto();
+        mImageView = findViewById(R.id.quiz_photo);
+        photo_name = findViewById(R.id.etPhotoName);
+
+        choosePhoto();
 
         Button btnSave = findViewById(R.id.btnSave);
         btnSave.setOnClickListener(v -> {
-            if(!etTextPhotoName.getText().toString().equals("")) {
+            if(!photo_name.getText().toString().equals("")) {
                 insertDataToDbs();
-                Toast.makeText(this, "Picture \"" + etTextPhotoName.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Picture \"" + photo_name.getText() + "\" was saved", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this, DatabaseActivity.class));
             } else {
                 Toast.makeText(this, "Enter name!", Toast.LENGTH_LONG).show();
@@ -56,7 +56,7 @@ public class AddActivity extends AppCompatActivity {
     }
 
     private void insertDataToDbs() {
-        String photoName = etTextPhotoName.getText().toString();
+        String photoName = photo_name.getText().toString();
         Bitmap photo = getBitmap(photoData);
 
         Item item = new Item(photoName,photo);
@@ -64,8 +64,7 @@ public class AddActivity extends AppCompatActivity {
         mItemViewModel.addItem(item);
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    public void openPhoto() {
+    public void choosePhoto() {
         Intent intent = new Intent();
         intent.setType("image/*");
         intent.setAction(Intent.ACTION_OPEN_DOCUMENT);

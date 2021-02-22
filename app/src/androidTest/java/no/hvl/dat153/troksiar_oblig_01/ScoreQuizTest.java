@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import no.hvl.dat153.troksiar_oblig_01.activities.MainActivity;
+import no.hvl.dat153.troksiar_oblig_01.activities.QuizActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;
@@ -36,20 +37,10 @@ import static org.hamcrest.Matchers.allOf;
 public class ScoreQuizTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<QuizActivity> mActivityTestRule = new ActivityTestRule<>(QuizActivity.class);
 
     @Test
     public void scoreQuizTest() {
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btnQuiz), withText("QUIZ"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        materialButton.perform(click());
-
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.quiz_photo_name),
                         childAtPosition(

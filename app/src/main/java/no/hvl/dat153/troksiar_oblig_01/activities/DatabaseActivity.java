@@ -6,6 +6,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,22 +18,23 @@ import java.util.List;
 import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-
-import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 
 public class DatabaseActivity extends AppCompatActivity {
 
-    private RecyclerView mRecycleView;
     private ImageAdapter mAdapter;
     private List<Item> items;
+    private ItemViewModel mItemViewModel;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
-        mRecycleView = findViewById(R.id.recycler_view);
+        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+
+        RecyclerView mRecycleView = findViewById(R.id.recycler_view);
         mRecycleView.setHasFixedSize(true);
         mRecycleView.setLayoutManager(new LinearLayoutManager(this));
 
