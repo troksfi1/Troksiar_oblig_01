@@ -13,9 +13,11 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import java.io.IOException;
+import java.util.Objects;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
@@ -35,6 +37,10 @@ public class AddActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
         mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
@@ -78,7 +84,8 @@ public class AddActivity extends AppCompatActivity {
         if (requestCode == PICK_IMAGE_REQUEST && resultCode == RESULT_OK && data != null && data.getData() != null) {
             photoData = data;
             mImageView.setImageBitmap(getBitmap(data));
-        }
+        } else
+            startActivity(new Intent(this, DatabaseActivity.class));
     }
 
     private Bitmap getBitmap(@NonNull Intent data) {

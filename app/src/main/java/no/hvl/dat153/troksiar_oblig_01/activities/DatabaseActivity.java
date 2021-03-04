@@ -2,10 +2,14 @@ package no.hvl.dat153.troksiar_oblig_01.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.util.List;
+import java.util.Objects;
 
 import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
 import no.hvl.dat153.troksiar_oblig_01.R;
@@ -32,6 +37,12 @@ public class DatabaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_database);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+
+        setSupportActionBar(toolbar);
+        //toolbar.getMenu();
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         RecyclerView mRecycleView = findViewById(R.id.recycler_view);
@@ -48,8 +59,19 @@ public class DatabaseActivity extends AppCompatActivity {
         mRecycleView.setAdapter(mAdapter);
         new ItemTouchHelper(itemTouchSimpleCallback).attachToRecyclerView(mRecycleView);
 
+        /*Button btnSend = findViewById(R.id.btn_send);
+        btnSend.setOnClickListener(view -> startActivity(new Intent(this, WiFiDirectActivity.class)));*/
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(view -> startActivity(new Intent(this, AddActivity.class)));
+    }
+
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.database_menu,menu);
+        return true;
     }
 
     //SwipeToDelete
