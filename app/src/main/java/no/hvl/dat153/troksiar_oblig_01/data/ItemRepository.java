@@ -13,25 +13,6 @@ public class ItemRepository {
     private final LiveData<List<Item>> allItems;
     private final ItemDao itemDao;
 
-
-    /*private void asyncFinished(List<Item> results) {
-        searchResults.setValue(results);
-    }*/
-
-    /*private static class QueryAsyncTask extends AsyncTask<LiveData<List<Item>>, Void, LiveData<List<Item>>> {
-
-        private ItemDao asyncTaskDao;
-
-        QueryAsyncTask(ItemDao dao) {
-            asyncTaskDao = dao;
-        }
-
-        @Override
-        protected LiveData<List<Item>> doInBackground(LiveData<List<Item>>... items) {
-            return asyncTaskDao.getAllItems();
-        }
-    }*/
-
     private static class InsertAsyncTask extends AsyncTask<Item, Void, Void> {
         private final ItemDao asyncItemDao;
 

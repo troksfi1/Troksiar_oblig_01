@@ -10,21 +10,34 @@
         layout="@layout/toolbar"/>
 
     <Button
+        android:id="@+id/btnQuiz"
+        android:layout_width="200dp"
+        android:layout_height="70dp"
+        android:textSize="20sp"
+        android:layout_alignParentTop="true"
+        android:backgroundTint="@color/yellow"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="195dp"
+        android:text="@string/btn_play" />
+
+    <Button
         android:id="@+id/btnDatabase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/btnQuiz"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
-        android:text="@string/btDatabase" />
+        android:layout_marginTop="50dp"
+        android:text="@string/btn_database" />
 
-    <Button
-        android:id="@+id/btnQuiz"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="270dp"
         android:layout_below="@+id/btnDatabase"
+        android:layout_alignParentStart="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="52dp"
-        android:text="@string/btnQuiz" />
+        android:layout_marginTop="45dp"
+        android:background="@drawable/background_world_map"
+        android:orientation="vertical" />
+
 
 </RelativeLayout>

@@ -3,8 +3,8 @@
     <string name="action_settings">Settings</string>
 
     <string name="btbPlus">PLUS</string>
-    <string name="btDatabase">DATABASE</string>
-    <string name="btnQuiz">QUIZ</string>
+    <string name="btn_play">PLAY!</string>
+    <string name="btn_database">DATABASE</string>
     <string name="btnAdd">ADD</string>
     <string name="enter_photo_name">Enter photo name</string>
     <string name="btnSave">SAVE</string>

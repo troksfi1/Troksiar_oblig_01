@@ -23,9 +23,7 @@ public class Item {
         this.photo = photo;
     }
 
-    public Item() {
 
-    }
 
     public int getId() {
         return id;
@@ -39,16 +37,9 @@ public class Item {
         return photoName;
     }
 
-    public void setPhotoName(String photoName) {
-        this.photoName = photoName;
-    }
-
     public Bitmap getPhoto() {
         return photo;
     }
 
-    public void setPhoto(Bitmap photo) {
-        this.photo = photo;
-    }
 }
 
