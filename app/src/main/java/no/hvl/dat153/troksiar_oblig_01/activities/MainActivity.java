@@ -3,18 +3,17 @@ package no.hvl.dat153.troksiar_oblig_01.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 public class MainActivity extends AppCompatActivity {
-
-    public static int btnClicker;
-    boolean oneTime = true;
-    public static ItemViewModel mItemViewModel;
+    boolean dbsIsFilled = false;
 
     @Override
     protected void onResume() {
@@ -26,13 +25,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        ItemViewModel mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
+        mItemViewModel.getAllItems().observe(this, items -> {
+            if(items.size() > 0) dbsIsFilled = true;
+        });
 
         Button btnDatabase = findViewById(R.id.btnDatabase);
-        btnDatabase.setOnClickListener(v -> openDatabaseActivity());
-
         Button btnQuiz = findViewById(R.id.btnQuiz);
-        btnQuiz.setOnClickListener(v -> openQuizActivity());
+
+        btnDatabase.setOnClickListener(v -> openDatabaseActivity());
+        btnQuiz.setOnClickListener(v -> {
+            if (dbsIsFilled)
+                openQuizActivity();
+            else {
+                Toast.makeText(this, "Add items first!", Toast.LENGTH_LONG).show();
+                openDatabaseActivity();
+            }
+        });
     }
 
     private void openDatabaseActivity() {

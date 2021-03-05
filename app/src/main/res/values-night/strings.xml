@@ -12,4 +12,6 @@
     <string name="pic_to_save">pic to save</string>
     <string name="pic_database">pic_database</string>
     <string name="name_database">NAME</string>
+    <string name="btn_send">BTN_SEND</string>
+    <string name="send_items">Send items</string>
 </resources>

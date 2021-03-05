@@ -3,23 +3,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
+
     <TextView
         android:id="@+id/guess_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/toolbar"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="148dp"
-        android:layout_marginLeft="148dp"
-        android:layout_marginTop="44dp"
+        android:layout_marginStart="145dp"
+        android:layout_marginLeft="145dp"
+        android:layout_marginTop="20dp"
         android:text="@string/guess_the_name" />
 
     <ImageView
         android:id="@+id/quiz_photo2"
-        android:layout_width="371dp"
-        android:layout_height="417dp"
+        android:layout_width="372dp"
+        android:layout_height="398dp"
         android:layout_below="@+id/guess_name"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="31dp"
@@ -29,6 +33,7 @@
         android:id="@+id/quiz_photo_name"
         android:layout_width="371dp"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/button_check"
         android:layout_below="@+id/quiz_photo2"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="19dp"
@@ -36,21 +41,22 @@
         android:layout_marginTop="21dp"
         android:layout_marginEnd="21dp"
         android:layout_marginRight="10dp"
+        android:layout_marginBottom="15dp"
         android:hint="@string/enter_photo_name"
-        android:inputType="text"
-        android:importantForAutofill="no" />
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <Button
         android:id="@+id/button_check"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/score"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginStart="158dp"
         android:layout_marginLeft="158dp"
-        android:layout_marginBottom="91dp"
+        android:layout_marginBottom="15dp"
         android:text="@string/checkButton" />
 
     <TextView

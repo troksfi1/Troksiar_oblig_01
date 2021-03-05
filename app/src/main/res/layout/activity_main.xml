@@ -1,22 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".activities.MainActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar"/>
 
     <Button
         android:id="@+id/btnDatabase"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="150dp"
+        android:layout_below="@+id/toolbar"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="94dp"
         android:text="@string/btDatabase" />
 
     <Button
         android:id="@+id/btnQuiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_below="@+id/btnDatabase"
         android:layout_centerHorizontal="true"
-        android:text="@string/btnQuiz"/>
+        android:layout_marginTop="52dp"
+        android:text="@string/btnQuiz" />
 
 </RelativeLayout>

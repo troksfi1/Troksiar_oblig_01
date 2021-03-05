@@ -10,14 +10,16 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
-
-import static no.hvl.dat153.troksiar_oblig_01.activities.MainActivity.mItemViewModel;
+import no.hvl.dat153.troksiar_oblig_01.data.ItemViewModel;
 
 public class QuizActivity extends AppCompatActivity {
 
@@ -36,9 +38,15 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
+
         photo = findViewById(R.id.quiz_photo2);
         guessedName = findViewById(R.id.quiz_photo_name);
         score = findViewById(R.id.score);
+
+        ItemViewModel mItemViewModel = new ViewModelProvider(this).get(ItemViewModel.class);
 
         mItemViewModel.getAllItems().observe(this, this::setItems);
 
