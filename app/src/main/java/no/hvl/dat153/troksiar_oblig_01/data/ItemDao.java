@@ -14,9 +14,6 @@ interface ItemDao {
     @Insert/*(onConflict = OnConflictStrategy.IGNORE)*/
     void addItem(Item item);
 
-    @Insert
-    void insertAll(Item... items);
-
     @Query("SELECT * FROM item")
     LiveData<List<Item>> getAllItems();
 

@@ -1,6 +1,5 @@
 package no.hvl.dat153.troksiar_oblig_01;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
@@ -33,7 +32,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return new ImageViewHolder(v);
     }
 
-    @SuppressLint("SetTextI18n")
+    //@SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull ImageViewHolder holder, int position) {
         String photoName = itemList.get(position).getPhotoName();
@@ -55,7 +54,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         return itemList == null ? 0 : itemList.size();
     }
 
-    public static class ImageViewHolder extends RecyclerView.ViewHolder {       //TODO DIFF
+    public static class ImageViewHolder extends RecyclerView.ViewHolder {
         public TextView textViewName;
         public ImageView imageView;
 
