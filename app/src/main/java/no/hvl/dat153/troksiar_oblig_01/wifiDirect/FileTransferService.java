@@ -1,7 +1,6 @@
 package no.hvl.dat153.troksiar_oblig_01.wifiDirect;
 
 import android.app.IntentService;
-import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
@@ -15,7 +14,6 @@ public class FileTransferService extends IntentService {
 
     private static final int SOCKET_TIMEOUT = 5000;
     public static final String ACTION_SEND_FILE = "no.hv;.dat153.troksiar_oblig_01.SEND_FILE";
-    public static final String EXTRAS_FILE_PATH = "file_url";
     public static final String EXTRAS_GROUP_OWNER_ADDRESS = "go_host";
     public static final String EXTRAS_GROUP_OWNER_PORT = "go_port";
 

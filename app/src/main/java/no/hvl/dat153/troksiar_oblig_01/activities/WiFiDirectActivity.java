@@ -43,9 +43,6 @@ public class WiFiDirectActivity extends Activity implements ChannelListener {
     private Channel channel;
     private BroadcastReceiver receiver = null;
 
-    public void setIsWifiP2pEnabled() {
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions,
             int[] grantResults) {
