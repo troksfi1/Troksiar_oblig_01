@@ -26,7 +26,7 @@ public class ItemViewModel extends AndroidViewModel {
         repository.deleteItem(item);
     }
 
-    public LiveData<List<Item>> getAllItems() {        //TODO Non public?
+    public LiveData<List<Item>> getAllItems() {
         return allItems;
     }
 }

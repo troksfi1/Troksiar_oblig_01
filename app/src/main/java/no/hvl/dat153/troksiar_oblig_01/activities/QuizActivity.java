@@ -58,7 +58,7 @@ public class QuizActivity extends AppCompatActivity {
                 scoreInt.set(scoreInt.get() + 1);
 
             } else {
-                Toast.makeText(this, "Never mind", Toast.LENGTH_LONG).show();
+                Toast.makeText(this, "Never mind. \nThe correct answer was: " + items.get(i).getPhotoName(), Toast.LENGTH_LONG).show();
             }
             score.setText("Score: " + scoreInt + " of " + btn);
             nextPicture();

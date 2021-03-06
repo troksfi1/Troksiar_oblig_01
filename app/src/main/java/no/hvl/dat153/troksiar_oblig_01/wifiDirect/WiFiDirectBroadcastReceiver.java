@@ -3,10 +3,8 @@ package no.hvl.dat153.troksiar_oblig_01.wifiDirect;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.net.NetworkInfo;
 import android.net.wifi.p2p.WifiP2pManager;
 import android.net.wifi.p2p.WifiP2pManager.Channel;
-import android.util.Log;
 
 import no.hvl.dat153.troksiar_oblig_01.activities.WiFiDirectActivity;
 
@@ -42,7 +40,7 @@ public class WiFiDirectBroadcastReceiver extends BroadcastReceiver {
             //TODO Call WifiP2pManager.requestPeers() to get a list of current peers
 
         } else if (WifiP2pManager.WIFI_P2P_CONNECTION_CHANGED_ACTION.equals(action)) {
-            //TODO Respond to new connection or disconnections  ANDROID < 10
+            //TODO Respond to new connection or disconnections
 
         } else if (WifiP2pManager.WIFI_P2P_THIS_DEVICE_CHANGED_ACTION.equals(action)) {
             //TODO Respond to this device's wifi state changing
