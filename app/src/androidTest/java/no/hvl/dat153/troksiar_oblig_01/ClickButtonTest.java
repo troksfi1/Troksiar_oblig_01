@@ -17,6 +17,7 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
+import no.hvl.dat153.troksiar_oblig_01.R;
 import no.hvl.dat153.troksiar_oblig_01.activities.MainActivity;
 
 import static androidx.test.espresso.Espresso.onView;
@@ -38,26 +39,26 @@ public class ClickButtonTest {
     @Test
     public void clickButtonTest() {
         ViewInteraction button = onView(
-                allOf(withId(R.id.btnQuiz), withText("QUIZ"),
+                allOf(withId(R.id.btnQuiz), withText("PLAY!"),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
         button.check(matches(isDisplayed()));
 
         ViewInteraction button2 = onView(
-                allOf(withId(R.id.btnQuiz), withText("QUIZ"),
+                allOf(withId(R.id.btnQuiz), withText("PLAY!"),
                         withParent(withParent(withId(android.R.id.content))),
                         isDisplayed()));
         button2.check(matches(isDisplayed()));
 
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btnQuiz), withText("QUIZ"),
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.btnQuiz), withText("PLAY!"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 1),
                         isDisplayed()));
-        materialButton.perform(click());
+        appCompatButton.perform(click());
     }
 
     private static Matcher<View> childAtPosition(

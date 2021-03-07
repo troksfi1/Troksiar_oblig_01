@@ -9,7 +9,7 @@ import androidx.room.Query;
 import java.util.List;
 
 @Dao
-interface ItemDao {
+public interface ItemDao {
 
     @Insert/*(onConflict = OnConflictStrategy.IGNORE)*/
     void addItem(Item item);

@@ -20,37 +20,39 @@ import org.junit.runner.RunWith;
 import no.hvl.dat153.troksiar_oblig_01.R;
 
 import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.pressImeActionButton;
 import static androidx.test.espresso.action.ViewActions.replaceText;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withClassName;
 import static androidx.test.espresso.matcher.ViewMatchers.withContentDescription;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ScoreTest {
+public class ScoreQuizTest {
 
     @Rule
-    public ActivityTestRule<MainActivity> mActivityTestRule = new ActivityTestRule<>(MainActivity.class);
+    public ActivityTestRule<QuizActivity> mActivityTestRule = new ActivityTestRule<>(QuizActivity.class);
 
     @Test
-    public void scoreTest() {
-        ViewInteraction materialButton = onView(
-                allOf(withId(R.id.btnDatabase), withText("DATABASE"),
+    public void scoreQuizTest() {
+
+        ViewInteraction appCompatButton = onView(
+                allOf(withId(R.id.btnQuiz), withText("PLAY!"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        materialButton.perform(click());
+        appCompatButton.perform(click());
 
         ViewInteraction floatingActionButton = onView(
                 allOf(withId(R.id.fab), withContentDescription("ADD"),
@@ -58,9 +60,21 @@ public class ScoreTest {
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                1),
+                                2),
                         isDisplayed()));
         floatingActionButton.perform(click());
+
+        ViewInteraction floatingActionButton2 = onView(
+                allOf(withId(R.id.fab), withContentDescription("ADD"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
+                        isDisplayed()));
+        floatingActionButton2.perform(click());
+
+
 
         ViewInteraction appCompatEditText = onView(
                 allOf(withId(R.id.etPhotoName),
@@ -68,94 +82,90 @@ public class ScoreTest {
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
-        appCompatEditText.perform(replaceText("log"), closeSoftKeyboard());
+        appCompatEditText.perform(replaceText("Julia"), closeSoftKeyboard());
 
         ViewInteraction appCompatEditText2 = onView(
-                allOf(withId(R.id.etPhotoName), withText("log"),
+                allOf(withId(R.id.etPhotoName), withText("Julia"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                0),
+                                1),
                         isDisplayed()));
         appCompatEditText2.perform(pressImeActionButton());
 
-        ViewInteraction appCompatEditText3 = onView(
-                allOf(withId(R.id.etPhotoName), withText("log"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                0),
-                        isDisplayed()));
-        appCompatEditText3.perform(click());
-
-        ViewInteraction materialButton2 = onView(
+        ViewInteraction appCompatButton2 = onView(
                 allOf(withId(R.id.btnSave), withText("SAVE"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        materialButton2.perform(click());
-
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Přejít nahoru"),
-                        childAtPosition(
-                                allOf(withId(R.id.action_bar),
-                                        childAtPosition(
-                                                withId(R.id.action_bar_container),
-                                                0)),
-                                1),
-                        isDisplayed()));
-        appCompatImageButton.perform(click());
-
-        ViewInteraction materialButton3 = onView(
-                allOf(withId(R.id.btnQuiz), withText("QUIZ"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                1),
-                        isDisplayed()));
-        materialButton3.perform(click());
-
-        ViewInteraction appCompatEditText4 = onView(
-                allOf(withId(R.id.quiz_photo_name),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText4.perform(replaceText("log"), closeSoftKeyboard());
-
-        pressBack();
-
-        ViewInteraction materialButton4 = onView(
-                allOf(withId(R.id.button_check), withText("Check"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 3),
                         isDisplayed()));
-        materialButton4.perform(click());
+        appCompatButton2.perform(click());
 
-        ViewInteraction textView = onView(
-                allOf(withId(R.id.score), withText("Score: 1 of 1"),
-                        withParent(withParent(withId(android.R.id.content))),
+        ViewInteraction floatingActionButton3 = onView(
+                allOf(withId(R.id.fab), withContentDescription("ADD"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                2),
                         isDisplayed()));
-        textView.check(matches(withText("Score: 1 of 1")));
+        floatingActionButton3.perform(click());
 
-        ViewInteraction textView2 = onView(
-                allOf(withId(R.id.score), withText("Score: 1 of 1"),
-                        withParent(withParent(withId(android.R.id.content))),
+        ViewInteraction appCompatEditText3 = onView(
+                allOf(withId(R.id.etPhotoName),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
                         isDisplayed()));
-        textView2.check(matches(withText("Score: 1 of 2")));
+        appCompatEditText3.perform(replaceText("Juan"), closeSoftKeyboard());
+
+        ViewInteraction appCompatEditText4 = onView(
+                allOf(withId(R.id.etPhotoName), withText("Juan"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatEditText4.perform(pressImeActionButton());
+
+        ViewInteraction appCompatButton3 = onView(
+                allOf(withId(R.id.btnSave), withText("SAVE"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                3),
+                        isDisplayed()));
+        appCompatButton3.perform(click());
+
+        ViewInteraction appCompatImageButton = onView(
+                allOf(withContentDescription("Desplazarse hacia arriba"),
+                        childAtPosition(
+                                allOf(withId(R.id.toolbar),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.RelativeLayout")),
+                                                0)),
+                                1),
+                        isDisplayed()));
+        appCompatImageButton.perform(click());
+
+        ViewInteraction appCompatButton4 = onView(
+                allOf(withId(R.id.btnQuiz), withText("PLAY!"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                1),
+                        isDisplayed()));
+        appCompatButton4.perform(click());
 
         ViewInteraction appCompatEditText5 = onView(
                 allOf(withId(R.id.quiz_photo_name),
@@ -163,39 +173,35 @@ public class ScoreTest {
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
-                                2),
+                                3),
                         isDisplayed()));
-        appCompatEditText5.perform(click());
+        appCompatEditText5.perform(replaceText("Julia"), closeSoftKeyboard());
 
-        ViewInteraction appCompatEditText6 = onView(
-                allOf(withId(R.id.quiz_photo_name),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText6.perform(replaceText("losa"), closeSoftKeyboard());
-
-        ViewInteraction appCompatEditText7 = onView(
-                allOf(withId(R.id.quiz_photo_name), withText("losa"),
-                        childAtPosition(
-                                childAtPosition(
-                                        withId(android.R.id.content),
-                                        0),
-                                2),
-                        isDisplayed()));
-        appCompatEditText7.perform(pressImeActionButton());
-
-        ViewInteraction materialButton5 = onView(
-                allOf(withId(R.id.button_check), withText("Check"),
+        ViewInteraction appCompatEditText1 = onView(
+                allOf(withId(R.id.quiz_photo_name), withText("Julia"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(android.R.id.content),
                                         0),
                                 3),
                         isDisplayed()));
-        materialButton5.perform(click());
+        appCompatEditText1.perform(pressImeActionButton());
+
+        ViewInteraction appCompatButton6 = onView(
+                allOf(withId(R.id.button_check), withText("Check"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withId(android.R.id.content),
+                                        0),
+                                4),
+                        isDisplayed()));
+        appCompatButton6.perform(click());
+
+        ViewInteraction textView = onView(
+                allOf(withId(R.id.score), withText("Score: 1 of 1"),
+                        withParent(withParent(withId(android.R.id.content))),
+                        isDisplayed()));
+        textView.check(matches(withText("Score: 1 of 1")));
     }
 
     private static Matcher<View> childAtPosition(

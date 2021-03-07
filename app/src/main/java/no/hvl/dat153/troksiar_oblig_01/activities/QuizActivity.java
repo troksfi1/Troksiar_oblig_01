@@ -28,6 +28,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextView score;
     private final AtomicInteger scoreInt = new AtomicInteger();
     private List<Item> items;
+    public String papa;
 
     int i = 0;
     int btn = 0;

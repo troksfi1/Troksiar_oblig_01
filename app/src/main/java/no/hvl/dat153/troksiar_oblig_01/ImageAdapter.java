@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import no.hvl.dat153.troksiar_oblig_01.activities.DatabaseActivity;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHolder> {
@@ -20,7 +21,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     private final Context mContext;
     private List<Item> itemList;
 
-    public ImageAdapter(Context context) {
+    public ImageAdapter(DatabaseActivity context) {
         mContext = context;
         notifyDataSetChanged();
     }
