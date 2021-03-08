@@ -4,7 +4,6 @@ package no.hvl.dat153.troksiar_oblig_01.wifiDirect;
 
     public TransferManager() {
         super();
-
     }
 
     @Override
@@ -18,6 +17,4 @@ package no.hvl.dat153.troksiar_oblig_01.wifiDirect;
         listener.onSuccess();
         listener.onFailure();
     }
-
-
 }*/

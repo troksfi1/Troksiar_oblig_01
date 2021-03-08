@@ -1,4 +1,4 @@
-package no.hvl.dat153.troksiar_oblig_01.activities;
+package no.hvl.dat153.troksiar_oblig_01;
 
 
 import android.view.View;
@@ -18,6 +18,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import no.hvl.dat153.troksiar_oblig_01.R;
+import no.hvl.dat153.troksiar_oblig_01.activities.QuizActivity;
 
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.action.ViewActions.click;

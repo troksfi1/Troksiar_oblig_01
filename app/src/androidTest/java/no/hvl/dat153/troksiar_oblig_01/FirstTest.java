@@ -1,4 +1,4 @@
-package no.hvl.dat153.troksiar_oblig_01.activities;
+package no.hvl.dat153.troksiar_oblig_01;
 
 
 import android.app.Activity;
@@ -67,6 +67,7 @@ import java.util.ListIterator;
 
 import no.hvl.dat153.troksiar_oblig_01.ImageAdapter;
 import no.hvl.dat153.troksiar_oblig_01.R;
+import no.hvl.dat153.troksiar_oblig_01.activities.QuizActivity;
 import no.hvl.dat153.troksiar_oblig_01.data.Item;
 import no.hvl.dat153.troksiar_oblig_01.data.ItemDao;
 import no.hvl.dat153.troksiar_oblig_01.data.ItemDao_Impl;
@@ -86,7 +87,7 @@ public class FirstTest{
     private ItemRoomDatabase db;
 
     @Rule
-    public ActivityTestRule<QuizActivity> mActivityTestRule = new ActivityTestRule<QuizActivity>(QuizActivity.class, false, false);//{
+    public ActivityTestRule<QuizActivity> mActivityTestRule = new ActivityTestRule<>(QuizActivity.class, false, false);//{
        //@Override
       // Activity a = mActivityTestRule.getActivity();
       // String p = a.get
@@ -102,7 +103,7 @@ public class FirstTest{
 
     @Before
     public void createDb() {
-        List<Item> list = new ArrayList<Item>();
+        List<Item> list = new ArrayList<>();
         Context context = ApplicationProvider.getApplicationContext();
         db = Room.inMemoryDatabaseBuilder(context, ItemRoomDatabase.class).build();
         itemDao = db.itemDao();
@@ -122,12 +123,12 @@ public class FirstTest{
     }
 
     @After
-    public void closeDb() throws IOException {
+    public void closeDb() {
         db.close();
     }
 
     @Test
-    public void firstTest() throws Exception {
+    public void firstTest() {
 
     }
 
